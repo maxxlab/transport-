@@ -1,9 +1,7 @@
 package data;
 
 import user.User;
-import usermenu.MenuPrinters;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +17,7 @@ public class UserData {
         return userData;
     }
 
-    public boolean matchSameUserName(String userName) {
+    public boolean matchSameUserName(String userName) throws IOException {
         for (User user : userData) {
             if(user.getUserName().equalsIgnoreCase(userName)){
                 return  true;
@@ -28,7 +26,7 @@ public class UserData {
         return false;
     }
 
-    public boolean matchSamePassword(String password) {
+    public boolean matchSamePassword(String password) throws IOException {
         for (User user : userData){
             if(user.getPassword().equals(password)){
                 return true;
@@ -37,32 +35,10 @@ public class UserData {
         return false;
     }
 
-    public void signUp() throws IOException {
-        FileWriter accounts = new FileWriter("C:\\Users\\Max\\IdeaProjects\\lab4\\src\\records\\signUpRecords.txt", true);
-        System.out.println(
-                        "===== MENU =====\n" +
-                        "\t*SIGN UP*"
-        );
-        Scanner scanner = new Scanner(System.in);
-        String userName, password;
-        System.out.println("Enter username: ");
-        userName = scanner.next();
-        if(!matchSameUserName(userName)){
-            accounts.append(userName).append("\n");
-            System.out.println("Enter password: ");
-            password = scanner.next();
-            accounts.append(password).append("\n");
-            userData.add(new User(userName, password));
-            MenuPrinters.LogMenu();
-        } else {
-            System.out.println("This username is already taken..");
-            signUp();
-        }
-        accounts.close();
-    }
+
 
     public boolean accountExists(String userName) throws IOException {
-        FileReader accountsReader = new FileReader("C:\\Users\\Max\\IdeaProjects\\lab4\\src\\records\\signUpRecords.txt");
+        FileReader accountsReader = new FileReader("C:\\Users\\Max\\IdeaProjects\\transport\\src\\main\\java\\records\\signUpRecords.txt");
         Scanner scanner = new Scanner(accountsReader);
         while(scanner.hasNext()){
             if(scanner.nextLine().equalsIgnoreCase(userName)){
@@ -73,32 +49,37 @@ public class UserData {
         return false;
     }
 
-    public void logIn() throws IOException {
-        System.out.println(
-                "===== MENU =====\n" +
-                        "\t*LOG IN*"
-        );
-        String userName, password;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter username: ");
-        userName = scanner.next();
+    public boolean logIn(String userName, String password) throws IOException {
+        fileReading();
         if(matchSameUserName(userName)){
-            System.out.println("Enter password: ");
-            password = scanner.next();
             if(matchSamePassword(password)){
-                System.out.println("\tLogged in successfully!!");
+                return true;
             } else {
-                System.out.println("\tIncorrect password! try again..");
-                logIn();
+                logIn(userName, password);
+                return false;
             }
         } else {
-            System.out.println("\tYou are not registered yet, let's sign up!");
-            signUp();
+            return false;
         }
+    }
+    public boolean signUp(String userName, String password) throws IOException {
+        FileWriter accounts = new FileWriter("C:\\Users\\Max\\IdeaProjects\\transport\\src\\main\\java\\records\\signUpRecords.txt", true);
+        fileReading();
+        if(!matchSameUserName(userName)){
+            accounts.append(userName).append("\n");
+            accounts.append(password).append("\n");
+            userData.add(new User(userName, password));
+            accounts.close();
+            return true;
+        } else {
+            accounts.close();
+            return false;
+        }
+
     }
 
     public void fileReading() throws IOException {
-        FileReader getAccounts = new FileReader("C:\\Users\\Max\\IdeaProjects\\lab4\\src\\records\\signUpRecords.txt");
+        FileReader getAccounts = new FileReader("C:\\Users\\Max\\IdeaProjects\\transport\\src\\main\\java\\records\\signUpRecords.txt");
         Scanner scanner = new Scanner(getAccounts);
         while(scanner.hasNext()){
             userData.add(new User(scanner.nextLine(), scanner.nextLine()));

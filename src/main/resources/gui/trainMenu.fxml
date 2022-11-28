@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="600.0" style="-fx-background-color: #41add9;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.SceneController">
+    <children>
+        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="280.0" mnemonicParsing="false" onAction="#ExitScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Go back to action menu" textAlignment="CENTER" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+        </Button>
+        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="192.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Find train car by range" textAlignment="CENTER" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+        </Button>
+        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToLoggingScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Sort train cars" textAlignment="CENTER" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+        </Button>
+    </children>
+</AnchorPane>
