@@ -1,8 +1,9 @@
 package train;
 
 public class TrainCar {
-    private TrainCarLevelsEnum levelOfComfort;
+    private String levelOfComfort;
     private int numberOfPlaces;
+    private int amountOfBaggage;
 
     public int getAmountOfBaggage() {
         return amountOfBaggage;
@@ -12,19 +13,19 @@ public class TrainCar {
         this.amountOfBaggage = amountOfBaggage;
     }
 
-    private int amountOfBaggage;
 
-    public TrainCar(TrainCarLevelsEnum levelOfComfort, int numberOfPlaces, int amountOfBaggage) {
+
+    public TrainCar(String levelOfComfort, int numberOfPlaces, int amountOfBaggage) {
         this.levelOfComfort = levelOfComfort;
         this.numberOfPlaces = numberOfPlaces;
         this.amountOfBaggage = amountOfBaggage;
     }
 
-    public TrainCarLevelsEnum getLevelOfComfort() {
+    public String getLevelOfComfort() {
         return levelOfComfort;
     }
 
-    public void setLevelOfComfort(TrainCarLevelsEnum levelOfComfort) {
+    public void setLevelOfComfort(String levelOfComfort) {
         this.levelOfComfort = levelOfComfort;
     }
 

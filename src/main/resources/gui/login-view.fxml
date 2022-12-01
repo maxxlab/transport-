@@ -9,11 +9,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="600.0" style="-fx-background-color: #41add9;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.SceneController">
    <children>
       <TextField fx:id="usernameField" layoutX="226.0" layoutY="111.0" />
-      <Label layoutX="275.0" layoutY="93.0" text="username" />
-      <Label layoutX="275.0" layoutY="208.0" text="password" />
-      <Button layoutX="251.0" layoutY="310.0" mnemonicParsing="false" onAction="#Authorization" text="Log in" />
+      <Label layoutX="275.0" layoutY="83.0" stylesheets="@/styleLabel.css" text="username" />
+      <Label layoutX="276.0" layoutY="199.0" stylesheets="@/styleLabel.css" text="password" />
+      <Button layoutX="202.0" layoutY="310.0" mnemonicParsing="false" onAction="#Authorization" stylesheets="@/styleStart.css" text="Log in" textFill="WHITE" />
       <PasswordField fx:id="passwordField" layoutX="223.0" layoutY="226.0" />
-      <Button layoutX="301.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToStarterScene" text="Go back" />
-      <Label fx:id="authCheck" layoutX="201.0" layoutY="292.0" minWidth="200.0" textAlignment="CENTER" />
+      <Button layoutX="316.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToStarterScene" stylesheets="@/styleStart.css" text="Go back" textFill="WHITE" />
+      <Label fx:id="authCheck" layoutX="198.0" layoutY="271.0" minWidth="200.0" stylesheets="@/styleLabel.css" textAlignment="CENTER" />
    </children>
 </AnchorPane>

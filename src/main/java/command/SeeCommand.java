@@ -13,6 +13,6 @@ public class SeeCommand implements Command{
 
     @Override
     public void execute() throws IOException {
-        trainData.showAllTrains();
+//        trainData.showAllTrains();
     }
 }

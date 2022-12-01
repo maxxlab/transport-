@@ -11,12 +11,12 @@
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </Button>
-        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="192.0" mnemonicParsing="false" onAction="#switchToRegisterScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="See trains" textAlignment="CENTER" textFill="WHITE">
+        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="192.0" mnemonicParsing="false" onAction="#switchToSeeTrainsScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="See trains" textAlignment="CENTER" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </Button>
-        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToLoggingScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Create a train" textAlignment="CENTER" textFill="WHITE">
+        <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToTrainCreationScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Create a train" textAlignment="CENTER" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>

@@ -16,7 +16,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Button>
-      <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToLoggingScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Log In" textAlignment="CENTER" textFill="WHITE">
+      <Button id="StartButton" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="101.0" mnemonicParsing="false" onAction="#switchToLoggingScene" prefHeight="50.0" prefWidth="163.0" stylesheets="@/styleStart.css" text="Log In" textAlignment="CENTER" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>

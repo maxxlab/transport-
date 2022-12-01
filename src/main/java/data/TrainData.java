@@ -2,72 +2,148 @@ package data;
 
 import train.Train;
 import train.TrainCar;
-import train.TrainCarLevelsEnum;
+import user.User;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.*;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
-import static usermenu.TrainMenu.trainMenu;
+import static org.apache.commons.lang3.StringUtils.lastIndexOf;
+import static org.apache.commons.lang3.StringUtils.substringBetween;
 
 public class TrainData {
-    List<Train> trains = new ArrayList<>();
+    private final String url = "jdbc:postgresql://localhost:5432/TransportDB";
+    private final String userDB = "postgres";
+    private final String passwordDB = "Loco9969";
 
-    public List<Train> getTrains() {
-        return trains;
+
+    /**
+     * Connect to the PostgreSQL database
+     *
+     * @return a Connection object
+     */
+    public Connection connect() throws SQLException {
+        return DriverManager.getConnection(url, userDB, passwordDB);
     }
 
-    public void showAllTrains() throws IOException {
-        System.out.println("*ALL TRAINS*");
-        if (trains.size()!=0) {
-            int counter = 1;
-            for (Train train : trains){
-                System.out.println(counter + " " + train);
-                System.out.println("\n");
+    static List<Train> trains = new ArrayList<>();
+
+    private static Train selectedTrain;
+
+
+    public Train getSelectedTrain(){
+        return selectedTrain;
+    }
+
+    public Train getTrainByName(String name) {
+        for (Train train : trains) {
+            if(train.getTrainName().equals(name)) {
+                return train;
             }
+        }
+        return null;
+    }
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Choose train number: ");
-            int trainNumber = scanner.nextInt();
+    public void createTrain(String name, ArrayList<TrainCar> cars){
+        insertTrain(new Train(name, cars));
+    }
 
-            trainMenu(trains.get(--trainNumber));
-        } else {
-            System.out.println("There are no trains now..");
+    public long insertTrain(Train train) {
+        String SQL = "INSERT INTO public.train(train_name,train_cars) "
+                + "VALUES(?,?)";
+
+        long id = 0;
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
+
+            StringBuilder sb = new StringBuilder();
+            ArrayList<String> cars = new ArrayList<>();
+            for (TrainCar car : train.getCars()){
+                cars.add(car.toString());
+                sb.append(car.toString()).append(" ,\n");
+            };
+
+            pstmt.setString(1, train.getTrainName());
+            pstmt.setString(2, sb.toString());
+
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows
+            if (affectedRows > 0) {
+                // get the ID back
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getLong(1);
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
+
+    public ArrayList<String> showAllTrainsFromDB() {
+
+        String SQL = "SELECT train_name, train_cars FROM public.train";
+        ArrayList<String> trainsList = new ArrayList<>();
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)) {
+            // display actor information
+            trainsList = displayTrain(rs);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return trainsList;
+    }
+
+    private  ArrayList<String> displayTrain(ResultSet rs) throws SQLException {
+        ArrayList<String> trainsList = new ArrayList<>();
+        int counter = 1;
+        while (rs.next()) {
+                StringBuilder stringBuilder = new StringBuilder();
+                trainsList.add(stringBuilder.append(counter).append(" ").append(rs.getString("train_name"))
+                        .append("\n").append(rs.getString("train_cars")).append("\n").toString());
+                counter++;
+            System.out.println("\n");
+        }
+        return trainsList;
+    }
+
+    public Train getTrainByNumber(int number) {
+         ArrayList<String> trains = showAllTrainsFromDB();
+         for (String train : trains) {
+             if(Character.getNumericValue(train.charAt(0)) == number){
+                 selectedTrain = TrainStringToObj(train);
+                 return TrainStringToObj(train);
+             }
+         }
+         return null;
+    }
+
+    public Train TrainStringToObj(String trainString) {
+        String trainName = substringBetween(trainString, " ", "\nTrainCar");
+        int numberOfCars = Collections.frequency(Arrays.asList(trainString.split("\n")), "TrainCar");
+
+        ArrayList<TrainCar> cars = new ArrayList<>();
+        String[] arr = trainString.split("TrainCar");
+
+        for (int i = 0, j = 1; i < numberOfCars; i++, j++) {
+            String levelOfComfort = substringBetween(arr[j], "comfort: ", "\n");
+            String numberOfPlaces = substringBetween(arr[j], "places: ", "\n");
+            String amountOfBaggage = substringBetween(arr[j], "baggage: ", " ,");
+            cars.add(new TrainCar(levelOfComfort, Integer.parseInt(numberOfPlaces), Integer.parseInt(amountOfBaggage)));
         }
 
+        return new Train(trainName, cars);
+
     }
-
-    public void createTrain(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of train: ");
-        String trainName = scanner.next();
-        System.out.println("Enter the limit of baggage: ");
-        int limitOfBaggage = scanner.nextInt();
-        List<TrainCar> cars = new ArrayList<>();
-        System.out.println("Add cars: ");
-        int choice = 1;
-        do {
-            System.out.println("Enter level of comfort(FirstClass,\n" +
-                    "    Sleep,\n" +
-                    "    SecondClass,\n" +
-                    "    Chair): ");
-            String levelOfComfort = scanner.next();
-            try {
-                TrainCarLevelsEnum.valueOf(levelOfComfort);
-                System.out.println("Enter number of places: ");
-                int numberOfPlaces = scanner.nextInt();
-                System.out.println("Enter amount of baggage: ");
-                int amountOfBaggage = scanner.nextInt();
-                cars.add(new TrainCar(TrainCarLevelsEnum.valueOf(levelOfComfort), numberOfPlaces, amountOfBaggage));
-                System.out.println("Do you want to add another one?(1-yes/0-no)");
-            } catch (IllegalArgumentException ex) {
-                System.out.println("*Error*\n try again..");
-                System.out.println("Do you want to add another one?(1-yes/0-no)");
-            }
-
-        } while(scanner.nextInt()!=0);
-        trains.add(new Train(trainName, limitOfBaggage, cars));
-    }
-
-
 }

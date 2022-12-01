@@ -1,0 +1,6 @@
+
+.label {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 16px;
+    -fx-end-margin: 2px;
+}

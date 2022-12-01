@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Train {
     private String trainName;
-    private int limitOfBaggage;
     private List<TrainCar> cars;
 
     public List<TrainCar> getCars() {
@@ -23,21 +22,14 @@ public class Train {
         this.trainName = trainName;
     }
 
-    public void setLimitOfBaggage(int limitOfBaggage) {
-        this.limitOfBaggage = limitOfBaggage;
-    }
 
     public String getTrainName() {
         return trainName;
     }
 
-    public int getLimitOfBaggage() {
-        return limitOfBaggage;
-    }
 
-    public Train(String trainName, int amountOfBaggage, List<TrainCar> cars) {
+    public Train(String trainName, List<TrainCar> cars) {
         this.trainName = trainName;
-        this.limitOfBaggage = amountOfBaggage;
         this.cars = cars;
     }
 
@@ -51,8 +43,8 @@ public class Train {
 
     public void sortCarsByLevelOfComfort(){
         this.getCars().sort(Comparator.comparingInt(TrainCar::getNumberOfPlaces));
-        System.out.println(this.getCars());
     }
+
 
     public void findCarByRange(){
         int min, max;
@@ -72,8 +64,10 @@ public class Train {
     public String toString() {
         return "Train\n" +
                 "Name: " + trainName +
-                "\nlimit of baggage: " + limitOfBaggage +
                 "\ncars: " + cars +
                 "\ntotal number of places: " + getAmountOfPassengers();
     }
+
+
+
 }

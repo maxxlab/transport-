@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #41add9;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.SceneController">
+   <children>
+      <Label layoutX="244.0" layoutY="14.0" text="Train Creation" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="trainNameField" layoutX="226.0" layoutY="75.0" />
+      <Label layoutX="71.0" layoutY="78.0" prefHeight="18.0" prefWidth="150.0" stylesheets="@/styleLabel.css" text="Enter the name:" />
+      <ChoiceBox fx:id="levelOfComfortChoice" layoutX="225.0" layoutY="187.0" prefWidth="150.0" />
+      <Label layoutX="286.0" layoutY="161.0" stylesheets="@/styleLabel.css" text="Add cars" />
+      <Label layoutX="33.0" layoutY="190.0" prefHeight="18.0" prefWidth="190.0" stylesheets="@/styleLabel.css" text="Choose level of comfort:" />
+      <ScrollBar fx:id="numberOfPlacesChoice" layoutX="244.0" layoutY="239.0" max="140.0" min="20.0" prefHeight="18.0" prefWidth="112.0" />
+      <Label layoutX="29.0" layoutY="239.0" prefHeight="18.0" prefWidth="211.0" stylesheets="@/styleLabel.css" text="Choose number of places:" />
+      <Label layoutX="19.0" layoutY="285.0" prefHeight="18.0" prefWidth="221.0" stylesheets="@/styleLabel.css" text="Choose amount of baggage:" />
+      <ScrollBar fx:id="amountOfBaggageChoice" layoutX="244.0" layoutY="285.0" max="1000.0" min="1.0" prefHeight="18.0" prefWidth="112.0" />
+      <Button layoutX="290.0" layoutY="329.0" mnemonicParsing="false" onAction="#addTrainCar" stylesheets="@/styleStart.css" text="Add" textFill="WHITE" />
+      <Button layoutX="448.0" layoutY="329.0" mnemonicParsing="false" onAction="#TrainCreation" stylesheets="@/styleStart.css" text="Complete" textFill="WHITE" />
+   </children>
+</AnchorPane>
