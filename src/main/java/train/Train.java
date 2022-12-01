@@ -45,21 +45,6 @@ public class Train {
         this.getCars().sort(Comparator.comparingInt(TrainCar::getNumberOfPlaces));
     }
 
-
-    public void findCarByRange(){
-        int min, max;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the minimal number of passengers: ");
-        min = scanner.nextInt();
-        System.out.println("Enter the maximal number of passengers: ");
-        max = scanner.nextInt();
-        for (TrainCar car : cars) {
-            if(car.getNumberOfPlaces() >= min && car.getNumberOfPlaces()<=max) {
-                System.out.println(car);
-            }
-        }
-    }
-
     @Override
     public String toString() {
         return "Train\n" +

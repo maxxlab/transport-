@@ -2,15 +2,9 @@ package data;
 
 import train.Train;
 import train.TrainCar;
-import user.User;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 
-import static org.apache.commons.lang3.StringUtils.lastIndexOf;
 import static org.apache.commons.lang3.StringUtils.substringBetween;
 
 public class TrainData {
@@ -28,22 +22,11 @@ public class TrainData {
         return DriverManager.getConnection(url, userDB, passwordDB);
     }
 
-    static List<Train> trains = new ArrayList<>();
-
     private static Train selectedTrain;
 
 
     public Train getSelectedTrain(){
         return selectedTrain;
-    }
-
-    public Train getTrainByName(String name) {
-        for (Train train : trains) {
-            if(train.getTrainName().equals(name)) {
-                return train;
-            }
-        }
-        return null;
     }
 
     public void createTrain(String name, ArrayList<TrainCar> cars){

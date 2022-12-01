@@ -28,31 +28,22 @@ public class UserData {
 
     private List<User> userData = new ArrayList<>();
 
-    public List<User> getUserData(){
+    public List<User> getUserData() {
         return userData;
     }
 
     public boolean logIn(String userName, String password) throws IOException {
-    if(findUser(userName,  password)){
-        return true;
-    } else {
-        return false;
+        if (findUser(userName, password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-//        if(matchSameUserName(userName)){
-//            if(matchSamePassword(password)){
-//                return true;
-//            } else {
-//                logIn(userName, password);
-//                return false;
-//            }
-//        } else {
-//            return false;
-//        }
-    }
+
     public boolean signUp(String userName, String password) throws IOException {
 
         findUser(userName, password);
-        if(!userExists(userName)){
+        if (!userExists(userName)) {
             insertUser(new User(userName, password));
             return true;
         } else {
@@ -107,9 +98,9 @@ public class UserData {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
-                if(username.equals(rs.getString("username"))
-                        && password.equals(rs.getString("password"))){
+            while (rs.next()) {
+                if (username.equals(rs.getString("username"))
+                        && password.equals(rs.getString("password"))) {
                     userFind = true;
                 }
             }
@@ -132,7 +123,7 @@ public class UserData {
 
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
-            userExist =  userExists(rs);
+            userExist = userExists(rs);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
