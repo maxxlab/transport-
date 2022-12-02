@@ -12,24 +12,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import static org.apache.commons.lang3.StringUtils.substringBetween;
 import javafx.stage.Stage;
 
 import data.UserData;
 import train.Train;
 import train.TrainCar;
-import user.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static javafx.scene.input.DataFormat.URL;
 
 public class SceneController implements Initializable {
     protected Stage stage;
@@ -147,8 +142,7 @@ public class SceneController implements Initializable {
     public void switchToTrainMenuScene(ActionEvent actionEvent) throws IOException {
         String SelectedTrain = MyTrainId.getText();
         int i = 0;
-        i = Character.getNumericValue(SelectedTrain.charAt(0));
-        Train t = trainData.getTrainByNumber(i);
+        Train t = trainData.getTrainByNumber(TrainData.getTrainNumber(SelectedTrain));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("trainMenu.fxml"));
         root = loader.load();
         SceneController sceneController = loader.getController();
@@ -276,6 +270,5 @@ public class SceneController implements Initializable {
     public void displaySelectedToRange(String name){
         SelectedToRangeId.setText(name);
     }
-
 
 }

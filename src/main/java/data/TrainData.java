@@ -104,7 +104,7 @@ public class TrainData {
     public Train getTrainByNumber(int number) {
          ArrayList<String> trains = showAllTrainsFromDB();
          for (String train : trains) {
-             if(Character.getNumericValue(train.charAt(0)) == number){
+             if(getTrainNumber(train) == number){
                  selectedTrain = TrainStringToObj(train);
                  return TrainStringToObj(train);
              }
@@ -128,5 +128,10 @@ public class TrainData {
 
         return new Train(trainName, cars);
 
+    }
+
+    public static int getTrainNumber(String SelectedTrain) {
+        String arr[] = SelectedTrain.split(" ");
+        return Integer.parseInt(arr[0]);
     }
 }
