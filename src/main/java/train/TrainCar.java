@@ -13,8 +13,6 @@ public class TrainCar {
         this.amountOfBaggage = amountOfBaggage;
     }
 
-
-
     public TrainCar(String levelOfComfort, int numberOfPlaces, int amountOfBaggage) {
         this.levelOfComfort = levelOfComfort;
         this.numberOfPlaces = numberOfPlaces;

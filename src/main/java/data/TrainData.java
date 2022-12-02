@@ -24,7 +24,6 @@ public class TrainData {
 
     private static Train selectedTrain;
 
-
     public Train getSelectedTrain(){
         return selectedTrain;
     }

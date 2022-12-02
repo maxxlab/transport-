@@ -2,7 +2,6 @@ package train;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public class Train {
     private String trainName;
@@ -16,12 +15,9 @@ public class Train {
         this.cars = cars;
     }
 
-
-
     public void setTrainName(String trainName) {
         this.trainName = trainName;
     }
-
 
     public String getTrainName() {
         return trainName;
@@ -52,7 +48,5 @@ public class Train {
                 "\ncars: " + cars +
                 "\ntotal number of places: " + getAmountOfPassengers();
     }
-
-
 
 }
